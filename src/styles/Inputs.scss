@@ -1,0 +1,21 @@
+input.big-input,
+div.rdt > input {
+    padding: 0.5em 1em;
+    border: 1px solid grey;
+    border-radius: 1em;
+    background: white;
+    transform-style: preserve-3d;
+    outline: none;
+    width: auto;
+}
+
+div.rdt {
+    & > input {
+        color: gray;
+    }
+
+    .rdtPicker {
+        border: 1px solid grey;
+        border-radius: 1em;
+    }
+}

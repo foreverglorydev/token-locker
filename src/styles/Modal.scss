@@ -1,0 +1,24 @@
+.custom-overlay {
+
+}
+
+.custom-modal {
+    border-radius: 1em;
+    background: var(--backgroundColor);
+    width: 500px;
+    max-height: 60%;
+}
+
+.find-token { 
+    margin-top: 20px;
+
+    input {
+        width: 100%;
+    }
+}
+
+.tokenlist {
+    &-token {
+        margin-top: 5px;
+    }
+}

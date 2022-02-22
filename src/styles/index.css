@@ -1,0 +1,115 @@
+.connect-button-grp-new {
+  width: 200%;
+  padding: 30px;
+  border: 1px solid rgb(73, 70, 70);
+  text-align: center;
+  margin-top: 50px;
+  background-color: #1a1e21;
+  border-radius: 20px;
+}
+@media (max-width:960px) {
+    .connect-button-grp-new{
+        width: 100%!important;
+    }
+}
+.connect-btn-grp-text-title {
+  font-size: 22px;
+  color: white !important;
+}
+.connect-btn-grp-text-text-b {
+  text-align: left !important;
+  font-size: 16px;
+  color: white !important;
+  line-height: 25px;
+  font-weight: 100;
+  margin-top: 30px;
+}
+.connect-btn-grp-text-text-s-i {
+  text-align: left !important;
+
+  font-size: 12px;
+  font-style: italic;
+  color: rgb(129, 129, 129) !important;
+  line-height: 20px;
+  font-weight: 100;
+}
+.connect-btn-grp-text-text-b-c {
+  text-align: left !important;
+  margin-top: 20px !important;
+  font-size: 12px;
+  font-style: italic;
+  color: rgb(179, 143, 26) !important;
+  line-height: 20px;
+  font-weight: 100;
+}
+.connect-btn-new {
+  background-color: transparent !important;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+.ReactModal__Overlay {
+  background-color: rgba(36, 35, 35, 0.735) !important;
+}
+.c-btn-modal-header {
+  background-color: black;
+  height: 60px;
+  border: 1px solid rgb(73, 70, 70);
+  margin: 0px !important;
+  padding: 10px;
+}
+.c-btn-modal-close {
+  background-color: transparent;
+  border: none;
+  font-size: 30px;
+  margin-top: 2px;
+  color: white !important;
+}
+.c-modal-text-i {
+  font-size: 10px;
+  color: grey;
+  margin-top: 5px;
+}
+.c-modal-wallet-logo {
+  width: 30px;
+  margin-top: 5px;
+}
+.c-modal-text-b {
+  margin-top: 5px;
+  font-size: 12px;
+  color: white;
+}
+.c-modal-wallet-btn {
+  padding: 10px 25px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 18px;
+}
+.c-modal-dm-btn {
+  border-radius: 30px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  margin-bottom: 10px;
+
+  font-size: 12px;
+}
+.c-modal-text-uc {
+  font-size: 10px;
+  color: #737577;
+}
+.c-btn-modal-footer{
+    height: 30px;
+    background-color: black;
+    margin-top: 308px;
+    text-align: right;
+    font-size: 10px ;
+    color: grey;
+    padding-top: 10px;
+}
+.tokenlist-new{
+    max-height: 250px!important;
+    /* overflow : scroll; */
+    overflow-y: scroll;
+    margin-top: 10px!important;
+}

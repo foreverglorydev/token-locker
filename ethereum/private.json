@@ -1,0 +1,6 @@
+{ 
+    "endpoints": {
+        "ropsten" : "https://ropsten.infura.io/v3/secret code"
+    },
+    "mnemonic": "12 word seed"
+}
