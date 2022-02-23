@@ -9,7 +9,7 @@ import {
   selectNetwork,
   setAddress,
 } from "../reduxSlices/networkSlice";
-import { ETH_BSC, ETH_GANACHE, ETH_ROPSTEN } from "../constants";
+import {ETH_BSC, ETH_BSC_TESTNET, ETH_GANACHE, ETH_ROPSTEN} from "../constants";
 import "../styles/index.css";
 import metamaskimg from "../assests/img/wallet/metamask.svg";
 import coinbaseimg from "../assests/img/wallet/coinbase.svg";
@@ -74,7 +74,7 @@ function NetworkSelector() {
               Unicrypt browser, and will not be migrateable.
             </div>
 
-          
+
               {networkSlice.userAddress ? (
                 <div>
                   <div className="find-token">
@@ -258,6 +258,7 @@ const getConnectButtonLabel = (networkState, externalDataSlice) => {
   if (chainId === ETH_ROPSTEN) networkName = "Ropsten";
   else if (chainId === ETH_GANACHE) networkName = "Ganache";
   else if (chainId === ETH_BSC) networkName = "BSC";
+  else if (chainId === ETH_BSC_TESTNET) networkName = "BSC Testnet";
 
   return `MetaMask (${networkName})`;
 };

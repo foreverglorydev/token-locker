@@ -1,6 +1,9 @@
-{ 
+{
     "endpoints": {
-        "ropsten" : "https://ropsten.infura.io/v3/secret code"
+        "ropsten" : "https://ropsten.infura.io/v3/a92faac6e14345c0863377643370c015",
+        "rinkeby": "https://rinkeby.infura.io/v3/a92faac6e14345c0863377643370c015",
+        "bsc_testnet": "https://data-seed-prebsc-1-s1.binance.org:8545",
+        "bsc_mainnet": "https://bsc-dataseed1.ninicoin.io"
     },
-    "mnemonic": "12 word seed"
+    "mnemonic": ""
 }

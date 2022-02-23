@@ -21,11 +21,39 @@ module.exports = {
             },
             network_id: 3,
             gas: 1500000
+        },
+        rinkeby: {
+            provider: function () {
+                return new HDWalletProvider(mnemonic, endpoints.rinkeby)
+            },
+            network_id: 4,
+            gas: 1500000
+        },
+        bsc_testnet: {
+            provider: function () {
+                return new HDWalletProvider(mnemonic, endpoints.bsc_testnet)
+            },
+            network_id: 97,
+            gas: 1500000
+        },
+        bsc_mainnet: {
+            provider: function () {
+                return new HDWalletProvider(mnemonic, endpoints.bsc_mainnet)
+            },
+            network_id: 956,
+            gas: 1500000
         }
     },
     compilers: {
         solc: {
             version: '0.8.1'
         }
+    },
+    plugins: [
+        'truffle-plugin-verify'
+    ],
+    api_keys: {
+        etherscan: 'DN9XS3J969K5IMYECGF2VHUUIERHYW78F6',
+        bscscan: 'NDKVPFY9T8NVAG3SSDB4UKMMDBPT1DWT6A'
     }
 };

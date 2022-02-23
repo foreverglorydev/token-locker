@@ -1,4 +1,4 @@
-import { ETH_BSC, ETH_GANACHE, ETH_MAINNET, ETH_ROPSTEN } from "./constants";
+import {ETH_BSC, ETH_BSC_TESTNET, ETH_GANACHE, ETH_MAINNET, ETH_ROPSTEN} from "./constants";
 import { getWeb3 } from "./web3provider";
 import Axios from "axios";
 
@@ -18,10 +18,20 @@ export const getEthTokenList = async () => {
                 ticker: "ALP",
                 address: "0xFe7bA2E9C18c7Eb318A66b5f6CD57A5c3F4e4a32",
                 totalSupply: "200000000000000000000",
-                decimals: 18    
+                decimals: 18
             }];
-        case ETH_BSC: 
+        case ETH_BSC:
             return (await Axios.get("/tokenlist_bsc.json"))
+                .data
+                .tokens
+                .map(x => ({
+                    name: x.name,
+                    ticker: x.symbol,
+                    address: x.address,
+                    decimals: x.decimals
+                }));
+        case ETH_BSC_TESTNET:
+            return (await Axios.get("/tokenlist_bsc_testnet.json"))
                 .data
                 .tokens
                 .map(x => ({

@@ -10,7 +10,7 @@ import {
   fetchExternalData,
   setNetwork,
 } from "../reduxSlices/externalDataSlice";
-import { ETH_BSC, ETH_GANACHE, ETH_ROPSTEN } from "../constants";
+import {ETH_BSC, ETH_BSC_TESTNET, ETH_GANACHE, ETH_ROPSTEN} from "../constants";
 import { setAddress } from "../reduxSlices/networkSlice";
 import Web3Utils from "web3-utils";
 import DateSelector from "./DateSelector";
@@ -23,7 +23,6 @@ const App = () => {
   const isMetaMask = window?.ethereum?.isMetaMask;
 
   useEffect(() => {
-    debugger;
     if (externalDataSlice.externalDataLoaded || !isMetaMask) return;
 
     window.ethereum.on("accountsChanged", (accounts) => {
@@ -43,7 +42,8 @@ const App = () => {
   if (
     externalDataSlice.chainId !== ETH_ROPSTEN &&
     externalDataSlice.chainId !== ETH_GANACHE &&
-    externalDataSlice.chainId !== ETH_BSC
+    externalDataSlice.chainId !== ETH_BSC &&
+      externalDataSlice.chainId !== ETH_BSC_TESTNET
   )
     return "Please switch network to BSC Network";
 

@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { ETH_GANACHE, ETH_MAINNET, ETH_ROPSTEN } from "./constants";
+import {ETH_BSC_TESTNET, ETH_GANACHE, ETH_MAINNET, ETH_ROPSTEN} from "./constants";
 import Web3Utils from 'web3-utils';
 import { getWeb3 } from './web3provider';
 
@@ -15,22 +15,30 @@ export const shortAddress = (addr, start = 5, end = 2) =>
 export const getLockerContract = async () => {
     let web3 = await getWeb3();
     let network = await web3.eth.getChainId();
+    let request, locker;
 
     switch (network) {
         case ETH_MAINNET:
         case ETH_ROPSTEN:
-            let request1 = await Axios.get("/contracts/Locker.json");
-            let locker1 = request1.data;
+            request = await Axios.get("/contracts/Locker.json");
+            locker = request.data;
             return {
-                abi: locker1.abi,
-                address: locker1.networks["3"].address
+                abi: locker.abi,
+                address: locker.networks["3"].address
             };
         case ETH_GANACHE:
-            let request = await Axios.get("/contracts/Locker.json");
-            let locker = request.data;
+            request = await Axios.get("/contracts/Locker.json");
+            locker = request.data;
             return {
                 abi: locker.abi,
                 address: locker.networks["5777"].address
+            };
+        case ETH_BSC_TESTNET:
+            request = await Axios.get("/contracts/Locker.json");
+            locker = request.data;
+            return {
+                abi: locker.abi,
+                address: locker.networks["97"].address
             };
         default:
             return []
@@ -47,10 +55,10 @@ export const getErc20Abi = async () => {
 
 export const toBigNumber = (number) => new Web3Utils.BN(number);
 
-export const fromBaseUnit = (value, decimals = 18) => 
-    value ? Web3Utils.fromWei(value?.toString(), decimalToUnit(decimals)) : null; 
+export const fromBaseUnit = (value, decimals = 18) =>
+    value ? Web3Utils.fromWei(value?.toString(), decimalToUnit(decimals)) : null;
 
-export const toBaseUnit = (value, decimals = 18) => 
+export const toBaseUnit = (value, decimals = 18) =>
     value ? Web3Utils.toWei(value?.toString(), decimalToUnit(decimals)) : null;
 
 const decimalToUnit = (decimal) => {
