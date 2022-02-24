@@ -15,6 +15,7 @@ import { setAddress } from "../reduxSlices/networkSlice";
 import Web3Utils from "web3-utils";
 import DateSelector from "./DateSelector";
 import Grid from "@material-ui/core/Grid";
+import TapPage from "./TabPage";
 
 const App = () => {
   const { externalDataSlice } = useSelector((state) => state);
@@ -52,10 +53,15 @@ const App = () => {
   return (
     <>
       <Grid container>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={4}>
           <NetworkSelector />
         </Grid>
-        <Grid item xs={12} md={6}>
+
+        <Grid item xs={12} md={8}>
+         <TapPage />
+        </Grid>
+
+        <Grid item xs={12} md={12} style={{display:'none'}}>
           <div className="lock">
             <div className="lock-blocks">
               <span className="lock-label first-label">
@@ -72,7 +78,7 @@ const App = () => {
               <UserLocks />
             </div>
           </div>
-        </Grid>
+        </Grid>        
       </Grid>
     </>
   );

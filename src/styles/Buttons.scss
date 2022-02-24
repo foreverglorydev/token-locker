@@ -29,6 +29,11 @@ button.big-button {
     transform-style: preserve-3d;
     transition: all 175ms cubic-bezier(0, 0, 1, 1);
 
+    height: 64px;
+    background-color: rgb(104, 214, 124);
+    color: white;
+    width: 80%;
+
     &.disabled {
         opacity: 0.5;
     }

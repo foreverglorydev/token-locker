@@ -23,7 +23,7 @@ const UserLocks = () => {
 
     return (
         <>
-            <span className="lock-label last-label">Your locks</span>
+            <span className="lock-label last-label"></span>
             <div className="lock-block user-locks">
                 {userLocksSlice.userLocks.map((x, index) =>
                     (<UserLock key={index} lock={x} index={index} />))}
@@ -46,6 +46,7 @@ const UserLock = ({ lock, index }) => {
 
     let claimButton = (
         <button
+            style={{width:"200px"}}
             className={btnclass}
             onClick={async () => {
                 if (!availableToClaim)

@@ -1,11 +1,11 @@
 .connect-button-grp-new {
-  width: 200%;
   padding: 30px;
-  border: 1px solid rgb(73, 70, 70);
-  text-align: center;
-  margin-top: 50px;
-  background-color: #1a1e21;
-  border-radius: 20px;
+  border: 1px solid #262626 !important;
+  text-align: center;  
+  background-color: #1a1e21 !important;
+  border-radius: 20px !important;
+  margin-top: 70px;
+  color: #fafafa !important;
 }
 @media (max-width:960px) {
     .connect-button-grp-new{
@@ -14,12 +14,12 @@
 }
 .connect-btn-grp-text-title {
   font-size: 22px;
-  color: white !important;
+  color: #fafafa !important;
 }
 .connect-btn-grp-text-text-b {
   text-align: left !important;
   font-size: 16px;
-  color: white !important;
+  color: #fafafa !important;
   line-height: 25px;
   font-weight: 100;
   margin-top: 30px;
@@ -62,7 +62,7 @@
   border: none;
   font-size: 30px;
   margin-top: 2px;
-  color: white !important;
+  color: #fafafa !important;
 }
 .c-modal-text-i {
   font-size: 10px;
@@ -76,20 +76,20 @@
 .c-modal-text-b {
   margin-top: 5px;
   font-size: 12px;
-  color: white;
+  color: #fafafa;
 }
 .c-modal-wallet-btn {
   padding: 10px 25px;
   background-color: transparent;
   border: none;
-  color: white;
+  color: #fafafa;
   font-size: 18px;
 }
 .c-modal-dm-btn {
   border-radius: 30px;
   background-color: transparent;
   border: none;
-  color: white;
+  color: #fafafa;
   margin-bottom: 10px;
 
   font-size: 12px;
@@ -112,4 +112,43 @@
     /* overflow : scroll; */
     overflow-y: scroll;
     margin-top: 10px!important;
+}
+
+.tokenlist-new::-webkit-scrollbar {
+  display: none;
+}
+
+.card {
+  margin-top: 16px;
+  border: 1px solid #262626;
+  padding: 16px;
+  height: 64px;
+  border-radius: 16px;
+}
+
+.MuiAppBar-colorPrimary {
+  color: #fff;
+  background-color: #000 !important;
+}
+
+.selecte-token {  
+    border: 1px solid #262626;
+    border-radius: 1em;
+    background: #101010;
+    transform-style: preserve-3d;
+    transition: all 175ms cubic-bezier(0, 0, 1, 1);
+    height: 54px;    
+    color: #fafafa;
+    width: 100%;
+}
+
+.rdtPicker{
+    min-width: 512px;
+    padding: 4px;
+    margin-top: 1px;
+    z-index: 99999 !important;
+    background: #111 !important;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
+    border: 1px solid #262626 !important;
+    color: #fafafa !important;
 }
