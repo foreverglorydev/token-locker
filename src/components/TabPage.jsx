@@ -15,7 +15,13 @@ import UserLocks from "./UserLocks";
 import { useDispatch, useSelector } from "react-redux";
 import DateSelector from "./DateSelector";
 import Grid from "@material-ui/core/Grid";
-import { fromBaseUnit } from '../helpers';
+import { fromBaseUnit } from '../helpers';  
+
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import LockPage from './LockPage';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -74,28 +80,44 @@ export default function TapPage() {
     <div className={classes.root}>
       <AppBar position="static">
         <Tabs centered value={value} onChange={handleChange} aria-label="simple tabs example">
-          <Tab label="Lock" {...a11yProps(0)} />
+          <Tab label="New Lock" {...a11yProps(0)} />
           <Tab label="Your Locks" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
       <Grid item xs={12} md={12}>
-          <div className="lock">
-            <div className="lock-blocks">
-              <span className="lock-label first-label">
-                Select token to lock
-              </span>
-              <div className="lock-block swap-addresses-from">
-                <TokenSelector />
+
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography>START LOCK</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <div className="lock">
+              <div className="lock-blocks">
+                <span className="lock-label first-label">
+                  Select token to lock
+                </span>
+                <div className="lock-block swap-addresses-from">
+                  <TokenSelector />
+                </div>
+                <span className="lock-label">Select date to lock until</span>
+                <div className="lock-block">
+                  <DateSelector />
+                </div>                
+              
               </div>
-              <span className="lock-label">Select date to lock until</span>
-              <div className="lock-block">
-                <DateSelector />
-              </div>
-              <ApproveLockButton />
-             
             </div>
-          </div>
+          </AccordionDetails>
+        </Accordion>
+
+        <LockPage />
+        <LockPage />
+
+        <ApproveLockButton />
         </Grid>    
       </TabPanel>
       <TabPanel value={value} index={1}>

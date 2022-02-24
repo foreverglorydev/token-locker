@@ -27,24 +27,17 @@ const useStyles = makeStyles({
 function LockPage() {
   const classes = useStyles();
   return (
-    <div className="connect-button-grp-new">
+    <div className="my-card">
     <CardContent>      
-      <Typography variant="h5" component="p">
-      Lock how many tokens?
+      <Typography variant="h6" component="p">
+      OPTIONAL: Enable free locking
       </Typography>
       <input className='big-input' />      
     </CardContent>
     <Divider></Divider> 
 
-        <CardContent>      
-      <Typography variant="h5" component="p">
-      Unlock on date 
-      </Typography>
-      <input className='big-input' type="datetime-local" style={{ colorScheme: "dark"}} />      
-    </CardContent>    
-
     <CardActions style={{marginTop: "16px"}}>            
-      <Button size="large" style={{height:64,backgroundColor:"#68d67c", color:"white"}} fullWidth >Lock</Button>
+      <Button size="large" variant="outlined" style={{height:54,color:"white"}} fullWidth >PAY 10 BNB FEE</Button>
     </CardActions>
   </div>
   )

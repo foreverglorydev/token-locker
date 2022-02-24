@@ -23,16 +23,16 @@ button {
 
 button.big-button {
     padding: 0.5em 1em;
-    border:1px solid grey;
-    border-radius: 1em;
-    background: rgb(16,16,16);
+    border: 1px solid grey;
+    border-radius: 8px;
+    background: #101010;
     transform-style: preserve-3d;
     transition: all 175ms cubic-bezier(0, 0, 1, 1);
-
     height: 64px;
-    background-color: rgb(104, 214, 124);
+    background-color: #68d67c;
     color: white;
-    width: 80%;
+    width: 100%;
+    margin-top: 16px;
 
     &.disabled {
         opacity: 0.5;
