@@ -86,8 +86,7 @@ function NetworkSelector() {
                       placeholder="Find token or paste contract"
                       onChange={async (event) => { 
                         setSelectedToken(null)                                              
-                        let userInput = event.target.value.toLowerCase();
-
+                        let userInput = event.target.value.toLowerCase();                        
                         if (
                           userInput.length === 42 &&
                           userInput.toLowerCase().startsWith("0x")
@@ -97,8 +96,23 @@ function NetworkSelector() {
                           );                          
                           setShownTokens([importedToken]);
                           setSelectedToken(importedToken)
-                          dispatch(selectToken(importedToken))                         
-                          return;
+                          dispatch(selectToken(importedToken))
+                        } else {                          
+                          if (!userInput) setShownTokens(fullTokenList);                          
+                          let filtered = fullTokenList.filter((token) => {
+                            if(token.ticker) {
+                              let ticker = token.ticker.toLowerCase();
+                              let name = token.name.toLowerCase();
+  
+                              return (
+                                ticker.startsWith(userInput) ||
+                                name.startsWith(userInput)
+                              );
+                            }                          
+                            
+                          });
+
+                          setShownTokens(filtered);
                         }
 
                         /*
@@ -148,8 +162,8 @@ function NetworkSelector() {
           ></button> */}
         </Grid>
       </Grid>
-      <Grid container spacing={2} style={{display:"none"}}>
-        <Grid item xs={12} md={5} lg={4}>
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={12} lg={12}>
           <div className="connect-button-grp-new tokenlist-new">
             <div className="tokenlist">
               {shownTokens.map((token) => {
@@ -159,9 +173,10 @@ function NetworkSelector() {
                     className="tokenlist-token"
                   >
                     <button
-                      className={"big-button"}
+                      className={"selecte-token"}
                       onClick={async () => {
                         dispatch(selectToken(token));
+                        setSelectedToken(token)                        
                         onCloseModal();
                       }}
                     >

@@ -114,6 +114,10 @@
     margin-top: 10px!important;
 }
 
+.tokenlist-new::-webkit-scrollbar {
+  display: none;
+}
+
 .card {
   margin-top: 16px;
   border: 1px solid #262626;
@@ -125,4 +129,26 @@
 .MuiAppBar-colorPrimary {
   color: #fff;
   background-color: #000 !important;
+}
+
+.selecte-token {  
+    border: 1px solid #262626;
+    border-radius: 1em;
+    background: #101010;
+    transform-style: preserve-3d;
+    transition: all 175ms cubic-bezier(0, 0, 1, 1);
+    height: 54px;    
+    color: #fafafa;
+    width: 100%;
+}
+
+.rdtPicker{
+    min-width: 512px;
+    padding: 4px;
+    margin-top: 1px;
+    z-index: 99999 !important;
+    background: #111 !important;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
+    border: 1px solid #262626 !important;
+    color: #fafafa !important;
 }
