@@ -46,7 +46,7 @@ const TokenSelector = () => {
                 placeholder="Amount"
                 type="number"
                 value={tokenSelectorSlice.amount} />
-            {balanceLabel}
+            {/*balanceLabel*/}
         </>
     );
 }

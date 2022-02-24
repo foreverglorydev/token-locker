@@ -3,10 +3,21 @@
   border: 1px solid #262626 !important;
   text-align: center;  
   background-color: #1a1e21 !important;
-  border-radius: 20px !important;
-  margin-top: 70px;
+  border-radius: 8px !important;
+  margin-right: 16px;
   color: #fafafa !important;
 }
+
+.my-card {
+  padding: 30px;
+  border: 1px solid #262626 !important;
+  text-align: center;  
+  background-color: #1a1e21 !important;
+  border-radius: 4px !important;  
+  color: #fafafa !important;
+  margin-top: 16px;
+}
+
 @media (max-width:960px) {
     .connect-button-grp-new{
         width: 100%!important;
@@ -151,4 +162,34 @@
     box-shadow: 0 1px 3px rgb(0 0 0 / 10%);
     border: 1px solid #262626 !important;
     color: #fafafa !important;
+    left: 25%;
+    min-width: 50% !important;
 }
+
+.PrivateTabIndicator-colorSecondary-4 {
+  background-color: #68d67c !important;
+}
+
+.MuiPaper-root {  
+  background-color: #1a1e21 !important;
+  color: #fafafa !important;
+}
+
+.MuiIconButton-root {
+  color: #fafafa !important;
+}
+
+
+.MuiTypography-body1 {
+  margin: -24px !important;
+}
+
+.MuiAccordionSummary-root.Mui-expanded {  
+  padding-left: 40px !important;
+}
+
+.MuiAccordionSummary-root {
+  padding-left: 40px !important;
+  padding-top: 16px !important;
+}
+
