@@ -5,6 +5,14 @@ import { fromBaseUnit, shortAddress } from "../helpers";
 import { claimByVaultId, getUserLocks } from "../reduxSlices/userLocksSlice";
 import LoadingSpinner from "./LoadingSpinner";
 
+
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Typography from '@material-ui/core/Typography';
+
+
 const UserLocks = () => {
     const { userLocksSlice, networkSlice } = useSelector(state => state);
     const dispatch = useDispatch();
@@ -63,12 +71,19 @@ const UserLock = ({ lock, index }) => {
     let label = `${amountToClaim} ${lock.nativeCurrency ? externalDataSlice.nativeCurrency.ticker : tokenTicker} - until ${untilDate}`;
 
     return (
-        <div className="user-lock">
-            <div className="userlock-label">
-                {label}
-            </div>
+
+        <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography> {label}</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
             {lock.loading ? <LoadingSpinner /> : claimButton}
-        </div>
+        </AccordionDetails>
+      </Accordion>       
     )
 }
 

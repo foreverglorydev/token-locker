@@ -15,7 +15,7 @@
   background-color: #1a1e21 !important;
   border-radius: 4px !important;  
   color: #fafafa !important;
-  margin-top: 16px;
+  margin-top: 8px;
 }
 
 @media (max-width:960px) {
@@ -191,5 +191,6 @@
 .MuiAccordionSummary-root {
   padding-left: 40px !important;
   padding-top: 16px !important;
+  margin-top: 8px !important;
 }
 
