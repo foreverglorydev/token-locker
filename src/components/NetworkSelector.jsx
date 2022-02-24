@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { shortAddress } from "../helpers";
+import { fromBaseUnit, shortAddress } from "../helpers";
 import Grid from "@material-ui/core/Grid";
 import Modal from "react-modal";
 
@@ -21,7 +21,9 @@ import { selectToken } from "../reduxSlices/tokenSelectorSlice";
 import { getWeb3 } from "../web3provider";
 import { getErc20Abi } from "../helpers";
 function NetworkSelector() {
-  const { networkSlice, externalDataSlice } = useSelector((state) => state);
+  
+  const { networkSlice, externalDataSlice, tokenSelectorSlice } = useSelector((state) => state);
+  const balance = fromBaseUnit(tokenSelectorSlice.balance);
   const dispatch = useDispatch();
   const [isModalVisible, setModalVisible] = useState(false);
   const customStyles = {
@@ -53,10 +55,11 @@ function NetworkSelector() {
     ...externalDataSlice.tokenList,
   ];
   const [shownTokens, setShownTokens] = useState(fullTokenList);
+  const [selectedToken, setSelectedToken] = useState()
   return (
     <>
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={5} lg={4}>
+      <Grid container spacing={4}>
+        <Grid item xs={12} md={12} >
           <div className="connect-button-grp-new">
             <div className="connect-btn-grp-text-title">Token Locker</div>
             <div className="connect-btn-grp-text-text-b">
@@ -81,7 +84,8 @@ function NetworkSelector() {
                     <input
                       className="big-input find-token-input"
                       placeholder="Find token or paste contract"
-                      onChange={async (event) => {
+                      onChange={async (event) => { 
+                        setSelectedToken(null)                                              
                         let userInput = event.target.value.toLowerCase();
 
                         if (
@@ -90,11 +94,14 @@ function NetworkSelector() {
                         ) {
                           let importedToken = await loadTokenByContractAddress(
                             userInput
-                          );
+                          );                          
                           setShownTokens([importedToken]);
+                          setSelectedToken(importedToken)
+                          dispatch(selectToken(importedToken))                         
                           return;
                         }
 
+                        /*
                         if (!userInput) setShownTokens(fullTokenList);
 
                         let filtered = fullTokenList.filter((token) => {
@@ -105,12 +112,23 @@ function NetworkSelector() {
                             ticker.startsWith(userInput) ||
                             name.startsWith(userInput)
                           );
-                        });
-
+                        });                        
                         setShownTokens(filtered);
+                        */
                       }}
                     />
                   </div>
+
+                  { balance && selectedToken &&
+                    <div className="card">
+                      <div style={{float:'left'}}>
+                      {`${selectedToken.name} / ${selectedToken.ticker}`}
+                      </div>                   
+                      <div style={{float:'right'}}>
+                        balacne <strong>{balance}</strong> 
+                      </div>
+                    </div>
+                  }
                 </div>
               ) : (
                 <button
@@ -123,14 +141,14 @@ function NetworkSelector() {
               )}
           </div>
         </Grid>
-        <Grid item xs={12} md={5} lg={4}>
+        <Grid item xs={12} md={6}>
           {/* <button
             className="tabs tabs-eth big-button animated shadow"
             onClick={() => dispatch(selectNetwork({ network: "eth" }))}
           ></button> */}
         </Grid>
       </Grid>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} style={{display:"none"}}>
         <Grid item xs={12} md={5} lg={4}>
           <div className="connect-button-grp-new tokenlist-new">
             <div className="tokenlist">
