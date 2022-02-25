@@ -10,7 +10,7 @@ import Box from '@material-ui/core/Box';
 import NetworkSelector from "./NetworkSelector";
 import ApproveLockButton from "./ApproveLockButton";
 import TokenSelector from "./TokenSelector";
-import "react-datetime/css/react-datetime.css";
+//import "react-datetime/css/react-datetime.css";
 import UserLocks from "./UserLocks";
 import { useDispatch, useSelector } from "react-redux";
 import DateSelector from "./DateSelector";
