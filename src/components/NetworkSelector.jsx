@@ -51,11 +51,12 @@ function NetworkSelector() {
   const onCloseModal = () => setOpen(false);
 
   const fullTokenList = [
-    externalDataSlice.nativeCurrency,
+    //externalDataSlice.nativeCurrency,
     ...externalDataSlice.tokenList,
   ];
   const [shownTokens, setShownTokens] = useState(fullTokenList);
   const [selectedToken, setSelectedToken] = useState()
+  console.log(externalDataSlice.nativeCurrency);
   return (
     <>
       <Grid container spacing={4}>

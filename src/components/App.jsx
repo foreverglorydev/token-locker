@@ -18,6 +18,7 @@ import Web3Utils from "web3-utils";
 import DateSelector from "./DateSelector";
 import Grid from "@material-ui/core/Grid";
 import TapPage from "./TabPage";
+import SwitchNetwork from "./SwitchNetwork";
 
 const App = () => {
   const { externalDataSlice } = useSelector((state) => state);
@@ -48,7 +49,8 @@ const App = () => {
     externalDataSlice.chainId !== ETH_BSC &&
       externalDataSlice.chainId !== ETH_BSC_TESTNET
   )
-    return "Please switch network to BSC Network";
+    //return "Please switch network to BSC Network";
+    return(<SwitchNetwork />)
 
   if (!externalDataSlice.externalDataLoaded) return "Loading...";
 
