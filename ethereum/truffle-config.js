@@ -34,14 +34,15 @@ module.exports = {
                 return new HDWalletProvider(mnemonic, endpoints.bsc_testnet)
             },
             network_id: 97,
-            gas: 1500000
+            gas: 2500000,
+            confirmations: 10
         },
         bsc_mainnet: {
             provider: function () {
                 return new HDWalletProvider(mnemonic, endpoints.bsc_mainnet)
             },
             network_id: 956,
-            gas: 1500000
+            gas: 1500000,           
         }
     },
     compilers: {
