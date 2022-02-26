@@ -9,13 +9,13 @@
 }
 
 .my-card {
-  padding: 30px;
+  padding: 8px;
   border: 1px solid #262626 !important;
-  text-align: center;  
+  text-align: center;
   background-color: #1a1e21 !important;
-  border-radius: 4px !important;  
+  border-radius: 4px !important;
   color: #fafafa !important;
-  margin-top: 8px;
+  margin-top: 12px;
 }
 
 @media (max-width:960px) {

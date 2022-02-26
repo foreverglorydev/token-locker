@@ -4,8 +4,9 @@ pragma solidity >=0.7.0 <0.9.0;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract Locker {
+contract Locker is Ownable {
     using SafeMath for uint256;
 
     struct ReleaseCheckpoint {
@@ -29,6 +30,11 @@ contract Locker {
     //Token might be duplicated, e.g. 
     //Vault1: USDC with 6 months lock + Vault2: USDC with 12 months lock + Vault3: DAI with custom schedule
     mapping(address => UserLocks) userLocks;
+
+    
+    //tokens fee 
+    address[] tokenAddressesWithFees;
+    mapping(address => uint256) public tokensFees;
 
     function lock(
         uint256 targetTimestamp,
@@ -54,10 +60,22 @@ contract Locker {
         //get checkpoint, in this this case here will be only one element
         ReleaseCheckpoint storage checkpoint = targetVault.checkpoints[0];
 
+
+        //calc fee percent
+        // base 10000, 0.35% = value * 35 / 10000
+        uint256 lpFeePercent = 35;
+
+        //calc fee and lock amount
+        uint256 fee = tokenCount.mul(lpFeePercent).div(10000);
+        uint256 lockAmount = tokenCount.sub(fee);
+
         //fill input data
         targetVault.tokenAddress = tokenContract;
         targetVault.nativeToken = false;
-        checkpoint.tokensCount = tokenCount;
+
+        // save amount of locked token
+        checkpoint.tokensCount = lockAmount;
+
         checkpoint.releaseTargetTimestamp = targetTimestamp;
         checkpoint.claimed = false;
 
@@ -69,6 +87,15 @@ contract Locker {
                 tokenCount
             )
         returns (bool) {
+
+            //save the fee amount in token fee address
+            address _tokenAddress = tokenContract;
+
+            if (tokensFees[_tokenAddress] == 0) {
+                tokenAddressesWithFees.push(_tokenAddress);
+            }
+            tokensFees[_tokenAddress] = tokensFees[_tokenAddress].add(fee);
+
             return vaultIndex;
         } catch (bytes memory) {
             revert("Not an ERC20 token");
@@ -157,4 +184,21 @@ contract Locker {
     {
         return userLocks[userAddress];
     }
+
+
+    //Withdraw the fee from admin
+    function withdrawFees(address payable withdrawalAddress) external onlyOwner {
+                
+        for (uint i = 1; i <= tokenAddressesWithFees.length; i++) {
+            address tokenAddress = tokenAddressesWithFees[tokenAddressesWithFees.length - i];
+            uint256 amount = tokensFees[tokenAddress];
+            if (amount > 0) {
+                IERC20(tokenAddress).transfer(withdrawalAddress, amount);
+            }
+            delete tokensFees[tokenAddress];
+            tokenAddressesWithFees.pop();
+        }
+
+        tokenAddressesWithFees = new address[](0);
+    }    
 }

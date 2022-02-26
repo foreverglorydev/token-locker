@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import { Divider } from '@material-ui/core';
+import { useDispatch, useSelector } from "react-redux";
 
 
 const useStyles = makeStyles({  
@@ -25,20 +26,30 @@ const useStyles = makeStyles({
 
 
 function LockPage() {
+  const {tokenSelectorSlice } = useSelector((state) => state);
+
   const classes = useStyles();
   return (
     <div className="my-card">
-    <CardContent>      
-      <Typography variant="h6" component="p">
-      OPTIONAL: Enable free locking
-      </Typography>
-      <input className='big-input' />      
-    </CardContent>
-    <Divider></Divider> 
+    <CardContent>
+      <p style={{fontSize:'16px' }}>
+        <span style={{float: 'left'}}>Fee:</span> 
+        <span style={{float: 'right'}}>0.35%</span>       
+      </p>      
+    </CardContent>     
+     <CardContent>
+     <p style={{fontSize:'16px' }}>
+        <span style={{float: 'left'}}>Total Debit:</span> 
+        <span style={{float: 'right'}}>{`${tokenSelectorSlice.amount * 0.9965}`}</span>       
+      </p>
+     </CardContent>
 
-    <CardActions style={{marginTop: "16px"}}>            
-      <Button size="large" variant="outlined" style={{height:54,color:"white"}} fullWidth >PAY 10 BNB FEE</Button>
-    </CardActions>
+    <Divider style={{clear:"both"}} />
+    <CardContent style={{marginTop: "16px"}}>
+      <span style={{fontSize: '12px', fontStyle:'italic', color:"#b9babb"}} >
+        Apply a fee to each lock, or pay it once seperately, paying the fee seperately helps ensure the amount of the lock matches the amount you entered.
+      </span>
+    </CardContent>
   </div>
   )
 }

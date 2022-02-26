@@ -115,6 +115,11 @@ export default function TapPage() {
           </AccordionDetails>
         </Accordion>
 
+        <div className="my-card">
+          <h4>{`${tokenSelectorSlice.amount} / ${Math.floor(balance)} Total Locked`}</h4>
+        </div>
+        
+        
         <LockPage />
         <LockPage />
 
