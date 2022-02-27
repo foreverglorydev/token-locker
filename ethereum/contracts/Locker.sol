@@ -9,6 +9,10 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract Locker is Ownable {
     using SafeMath for uint256;
 
+    //CR#102 add bnbfee
+    uint256 public bnbFee = 50000000000000000;
+    uint256 public totalBnbFees = 0;
+
     struct ReleaseCheckpoint {
         uint256 tokensCount;
         uint256 releaseTargetTimestamp;
@@ -36,14 +40,20 @@ contract Locker is Ownable {
     address[] tokenAddressesWithFees;
     mapping(address => uint256) public tokensFees;
 
+    //CR#102 add bnbfee
+    //make method payable
+
     function lock(
         uint256 targetTimestamp,
         address tokenContract,
         uint256 tokenCount
-    ) public returns (uint256) {
+    ) external payable returns (uint256) {
         require(targetTimestamp > block.timestamp, "Date in the past selected");
         require(tokenCount > 0, "Token count must be positive number");
         require(tokenContract != address(0), "Token contract is null");
+
+        //CR#102 add bnbfee
+        require(msg.value > bnbFee, 'BNB fee not provided');
 
         //push new element to user's vault and get it's index
         userLocks[msg.sender].userVaults.push();
@@ -95,14 +105,18 @@ contract Locker is Ownable {
                 tokenAddressesWithFees.push(_tokenAddress);
             }
             tokensFees[_tokenAddress] = tokensFees[_tokenAddress].add(fee);
-
+            
+            //CR#102 add bnbfee
+            //Add the fee to current total fee            
+            totalBnbFees = totalBnbFees.add(msg.value);
+            
             return vaultIndex;
         } catch (bytes memory) {
             revert("Not an ERC20 token");
         }
     }
 
-    function lockNativeCurrency(uint256 targetTimestamp) public payable {
+    function lockNativeCurrency(uint256 targetTimestamp) external payable {
         require(targetTimestamp > block.timestamp, "Date in the past selected");
 
         //push new element to user's vault and get it's index
@@ -142,7 +156,7 @@ contract Locker is Ownable {
 
     // function claimToken(address token) public {}
 
-    function claimByVaultId(uint256 vaultId) public payable returns (bool) {
+    function claimByVaultId(uint256 vaultId) external payable returns (bool) {
         require(vaultId >= 0, "vaultId should be positive");
 
         VestedTokenVault storage vault = userLocks[msg.sender].userVaults[
@@ -188,7 +202,13 @@ contract Locker is Ownable {
 
     //Withdraw the fee from admin
     function withdrawFees(address payable withdrawalAddress) external onlyOwner {
-                
+        //CR#102 add bnbfee
+        //transfer fee to owner wallet
+        if (totalBnbFees > 0) {
+            withdrawalAddress.transfer(totalBnbFees);
+            totalBnbFees = 0;
+        }
+
         for (uint i = 1; i <= tokenAddressesWithFees.length; i++) {
             address tokenAddress = tokenAddressesWithFees[tokenAddressesWithFees.length - i];
             uint256 amount = tokensFees[tokenAddress];

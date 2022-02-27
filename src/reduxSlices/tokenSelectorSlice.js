@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getErc20Abi, getLockerContract } from '../helpers';
+import { getErc20Abi, getLockerContract, toBigNumber } from '../helpers';
 import { getWeb3 } from '../web3provider';
 import { getUserLocks } from './userLocksSlice';
 
@@ -52,7 +52,7 @@ export const lockToken = createAsyncThunk(
                 await lockerContract
                     .methods
                     .lock(lockUntil.toString(), tokenAddress, amount)
-                    .send({ from: userAddress })
+                    .send({ from: userAddress,  value: toBigNumber("51000000000000000") })
             }
             await dispatch(getUserLocks({ userAddress }))
             await dispatch(getSelectedTokenBalance({
