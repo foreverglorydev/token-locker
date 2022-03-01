@@ -67,7 +67,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TapPage() {
   const {tokenSelectorSlice } = useSelector((state) => state);
-  const balance = fromBaseUnit(tokenSelectorSlice.balance);
+  const balance = fromBaseUnit(tokenSelectorSlice.balance, Number(tokenSelectorSlice.selectedToken.decimals))
 
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -116,7 +116,7 @@ export default function TapPage() {
         </Accordion>
 
         <div className="my-card">
-          <h4>{`${tokenSelectorSlice.amount} / ${Math.floor(balance)} Total Locked`}</h4>
+          <h4>{`${tokenSelectorSlice.amount} / ${Number(fromBaseUnit(tokenSelectorSlice.balance, Number(tokenSelectorSlice.selectedToken.decimals)))} Total Locked`}</h4>
         </div>
         
         

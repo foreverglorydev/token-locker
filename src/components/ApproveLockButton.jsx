@@ -79,13 +79,13 @@ const ApproveLockBtnForErc20 = () => {
     const dispatch = useDispatch();
 
     let selToken = tokenSelectorSlice.selectedToken;
-    let balance = fromBaseUnit(tokenSelectorSlice.balance, selToken.decimals);
+    let balance = fromBaseUnit(tokenSelectorSlice.balance, Number(selToken.decimals));
     let valid = selToken.address &&
         Number(tokenSelectorSlice.amount) > 0 &&
         Number(tokenSelectorSlice.amount) <= Number(balance) &&
         tokenSelectorSlice.lockUntil > moment().unix();
 
-    let approved = Number(fromBaseUnit(tokenSelectorSlice.approvedAmount, selToken.decimals)) >= Number(tokenSelectorSlice.amount);
+    let approved = Number(fromBaseUnit(tokenSelectorSlice.approvedAmount, Number(selToken.decimals))) >= Number(tokenSelectorSlice.amount);
     let btnclass = `lock-button animated big-button ${!valid && "disabled"}`;
 
     if (approved)
@@ -98,7 +98,7 @@ const ApproveLockBtnForErc20 = () => {
                 let action = lockToken({
                     isNative: selToken.native,
                     lockUntil: tokenSelectorSlice.lockUntil.toString(),
-                    amount: toBaseUnit(tokenSelectorSlice.amount, selToken.decimals),
+                    amount: toBaseUnit(tokenSelectorSlice.amount, Number(selToken.decimals)),
                     tokenAddress: selToken.address,
                     userAddress: networkSlice.userAddress
                 });
