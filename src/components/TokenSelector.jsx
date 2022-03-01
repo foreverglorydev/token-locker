@@ -11,6 +11,7 @@ const TokenSelector = () => {
     const selectedToken = tokenSelectorSlice.selectedToken;
     const tokenList = externalDataSlice.tokenList;
 
+    const balance = fromBaseUnit(tokenSelectorSlice.balance, Number(selectedToken.decimals))
     useEffect(() => {
         if (selectedToken.ticker)
             return;
@@ -40,7 +41,10 @@ const TokenSelector = () => {
             <SelectTokenModal />
             <input className="big-input"
                 onChange={(e) => {
-                    let amount = e.target.value.replace(",", ".");
+                    let amount = Number(e.target.value.replace(",", "."));
+                    if(amount > balance ) {
+                        amount = balance
+                    }
                     dispatch(setTokenAmount(amount));
                 }}
                 placeholder="Amount"

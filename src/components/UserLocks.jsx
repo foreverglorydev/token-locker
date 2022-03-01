@@ -56,6 +56,7 @@ const UserLock = ({ lock, index }) => {
         <button
             style={{width:"200px"}}
             className={btnclass}
+            className={"claim"}
             onClick={async () => {
                 if (!availableToClaim)
                     return;

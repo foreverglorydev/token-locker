@@ -23,7 +23,7 @@ import { getErc20Abi } from "../helpers";
 function NetworkSelector() {
   
   const { networkSlice, externalDataSlice, tokenSelectorSlice } = useSelector((state) => state);
-  const balance = fromBaseUnit(tokenSelectorSlice.balance);
+  
   const dispatch = useDispatch();
   const [isModalVisible, setModalVisible] = useState(false);
   const customStyles = {
@@ -56,7 +56,8 @@ function NetworkSelector() {
   ];
   const [shownTokens, setShownTokens] = useState(fullTokenList);
   const [selectedToken, setSelectedToken] = useState()
-  console.log(externalDataSlice.nativeCurrency);
+  const [d, setD] = useState(0)
+  const balance = (tokenSelectorSlice.balance); 
   return (
     <>
       <Grid container spacing={4}>
@@ -97,7 +98,10 @@ function NetworkSelector() {
                           );                          
                           setShownTokens([importedToken]);
                           setSelectedToken(importedToken)
+                          console.log("xxxxx");
+                          console.log(importedToken.decimals);
                           dispatch(selectToken(importedToken))
+                          setD(importedToken.decimals)                                                                         
                         } else {                          
                           if (!userInput) setShownTokens(fullTokenList);                          
                           let filtered = fullTokenList.filter((token) => {
@@ -140,7 +144,7 @@ function NetworkSelector() {
                       {`${selectedToken.name} / ${selectedToken.ticker}`}
                       </div>                   
                       <div style={{float:'right'}}>
-                        balacne <strong>{balance}</strong> 
+                        balacne <strong>{Number(fromBaseUnit(tokenSelectorSlice.balance, Number(tokenSelectorSlice.selectedToken.decimals)))}</strong> 
                       </div>
                     </div>
                   }
