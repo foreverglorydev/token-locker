@@ -34,15 +34,18 @@ module.exports = {
                 return new HDWalletProvider(mnemonic, endpoints.bsc_testnet)
             },
             network_id: 97,
-            gas: 2500000,
-            confirmations: 10
+            gas: 2400000,                 
+            confirmations: 10,
+            timeoutBlocks: 200                                            
         },
         bsc_mainnet: {
             provider: function () {
                 return new HDWalletProvider(mnemonic, endpoints.bsc_mainnet)
             },
-            network_id: 956,
-            gas: 1500000,           
+            network_id: 56,            
+            gas: 20000000,            
+            confirmations: 10,
+            timeoutBlocks: 200            
         }
     },
     compilers: {
@@ -55,6 +58,6 @@ module.exports = {
     ],
     api_keys: {
         etherscan: 'DN9XS3J969K5IMYECGF2VHUUIERHYW78F6',
-        bscscan: 'NDKVPFY9T8NVAG3SSDB4UKMMDBPT1DWT6A'
+        bscscan: 'RAXCSUFJI4V26HTE72BZFYR7CEB81V7JME'
     }
 };

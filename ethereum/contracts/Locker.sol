@@ -13,6 +13,10 @@ contract Locker is Ownable {
     uint256 public bnbFee = 50000000000000000;
     uint256 public totalBnbFees = 0;
 
+    //calc fee percent
+    // base 10000, 0.35% = value * 35 / 10000
+    uint256 public lpFeePercent = 35;
+
     struct ReleaseCheckpoint {
         uint256 tokensCount;
         uint256 releaseTargetTimestamp;
@@ -53,7 +57,7 @@ contract Locker is Ownable {
         require(tokenContract != address(0), "Token contract is null");
 
         //CR#102 add bnbfee
-        require(msg.value > bnbFee, 'BNB fee not provided');
+        require(msg.value >= bnbFee, 'BNB fee not provided');
 
         //push new element to user's vault and get it's index
         userLocks[msg.sender].userVaults.push();
@@ -71,9 +75,7 @@ contract Locker is Ownable {
         ReleaseCheckpoint storage checkpoint = targetVault.checkpoints[0];
 
 
-        //calc fee percent
-        // base 10000, 0.35% = value * 35 / 10000
-        uint256 lpFeePercent = 35;
+       
 
         //calc fee and lock amount
         uint256 fee = tokenCount.mul(lpFeePercent).div(10000);
@@ -220,5 +222,15 @@ contract Locker is Ownable {
         }
 
         tokenAddressesWithFees = new address[](0);
-    }    
+    }
+    
+    function setBnbFee(uint256 fee) external onlyOwner {
+        require(fee > 0, 'Fee is too small');
+        bnbFee = fee;
+    }
+
+    function setLpFee(uint256 percent) external onlyOwner {
+        require(percent > 0, 'Percent is too small');
+        lpFeePercent = percent;
+    }       
 }
