@@ -97,9 +97,7 @@ function NetworkSelector() {
                             userInput
                           );                          
                           setShownTokens([importedToken]);
-                          setSelectedToken(importedToken)
-                          console.log("xxxxx");
-                          console.log(importedToken.decimals);
+                          setSelectedToken(importedToken)                          
                           dispatch(selectToken(importedToken))
                           setD(importedToken.decimals)                                                                         
                         } else {                          
