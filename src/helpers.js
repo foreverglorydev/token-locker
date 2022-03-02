@@ -38,7 +38,7 @@ export const getLockerContract = async () => {
             locker = request.data;
             return {
                 abi: locker.abi,
-                address: locker.networks["97"].address
+                address: locker.networks["56"].address
             };
         default:
             return []
