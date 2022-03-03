@@ -25,7 +25,7 @@ function SwitchNetwork() {
     const web3 = await getWeb3();  
     await web3.currentProvider.request({
       method: "wallet_switchEthereumChain",
-      params: [{ chainId: "0x61" }],
+      params: [{ chainId: "0x38" }],
     });
   }
 
